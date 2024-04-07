@@ -7,7 +7,7 @@ import { Exercise } from '@prisma/client'
 import { PlusIcon, TrashIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'sonner'
 import { Loader } from './loader'
 import { Button, buttonVariants } from './ui/button'
@@ -112,7 +112,7 @@ export const ExerciseList: React.FC<Props> = ({
             </>
           ) : (
             <p className="text-center mt-8 text-lg">
-              You don't have any exercises!
+              You don&apos;t have any exercises!
             </p>
           )}
         </div>

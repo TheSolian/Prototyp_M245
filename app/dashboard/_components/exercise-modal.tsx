@@ -33,7 +33,7 @@ export const ExerciseModal: React.FC<Props> = ({ userId }) => {
       setIsLoading(false)
     }
     run()
-  }, [])
+  }, [userId])
 
   return (
     <Dialog>
