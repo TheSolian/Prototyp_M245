@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 export default function Page() {
   const { userId } = useAuth()
-  const [exercises, setExercises] = useState<Exercise[]>([])
+  const [exercises, setExercises] = useState<Exercise[]>()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -24,10 +24,10 @@ export default function Page() {
 
   return (
     <div className="container pt-8">
-      {exercises.length > 0 && (
+      {exercises && (
         <ExerciseList
           title="My Exercises"
-          exercises={exercises}
+          exercises={exercises || []}
           actionLabel="Add Exercise"
           actionHref="/exercises"
           itemActionButtonType="remove"

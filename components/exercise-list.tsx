@@ -15,7 +15,7 @@ import { Input } from './ui/input'
 
 type Props = {
   title: string
-  exercises: Exercise[] | undefined
+  exercises: Exercise[]
   actionLabel: string
   actionHref: string
   itemActionButtonType: 'add' | 'remove'
@@ -31,9 +31,7 @@ export const ExerciseList: React.FC<Props> = ({
   isLoading,
 }) => {
   const { userId } = useAuth()
-  const [exercises, setExercises] = useState<Exercise[] | undefined>(
-    initialExercises
-  )
+  const [exercises, setExercises] = useState<Exercise[]>(initialExercises)
   const [searchQuery, setSearchQuery] = useState('')
 
   const handleClick = async (exerciseId: string) => {
@@ -56,10 +54,11 @@ export const ExerciseList: React.FC<Props> = ({
   }
 
   const filteredExercises =
-    exercises &&
-    exercises.filter((exercise) =>
-      exercise.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    (exercises.length > 0 &&
+      exercises.filter((exercise) =>
+        exercise.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )) ||
+    []
 
   return (
     <div className="space-y-8">
@@ -78,7 +77,7 @@ export const ExerciseList: React.FC<Props> = ({
       </div>
       {!isLoading ? (
         <div className="flex flex-col gap-8">
-          {filteredExercises ? (
+          {filteredExercises.length > 0 ? (
             <>
               {filteredExercises.map((exercise) => (
                 <div
@@ -112,7 +111,9 @@ export const ExerciseList: React.FC<Props> = ({
               ))}
             </>
           ) : (
-            <p>No Items here</p>
+            <p className="text-center mt-8 text-lg">
+              You don't have any exercises!
+            </p>
           )}
         </div>
       ) : (
